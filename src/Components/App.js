@@ -29,6 +29,12 @@ const App = () => {
     setNewTask(textTask);
   };
 
+  const upDateTask = (text, key) => {
+    let newListTasks = listTasks;
+    const itemModified = newListTasks.splice(key, 1, text);
+    setListTasks(newListTasks);
+  };
+
   return (
     <div>
       <Header />
@@ -44,7 +50,7 @@ const App = () => {
           />
           <button type="submit">OK!</button>
         </form>
-        <ListTasks list={listTasks} />
+        <ListTasks list={listTasks} upDateTask={upDateTask} />
       </Main>
       <Footer />
     </div>
