@@ -8,12 +8,20 @@ const Main = styled.main`
   background: #24a197;
   color: white;
   height: 80vh;
-  padding: 20px;
+  padding: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Form = styled.form`
+  margin: 30px;
 `;
 
 const App = () => {
   const [newTask, setNewTask] = useState("");
   const [listTasks, setListTasks] = useState([]);
+  const [inputDisability, setInputDisability] = useState(true);
 
   const addTask = (ev) => {
     ev.preventDefault();
@@ -29,6 +37,10 @@ const App = () => {
     setNewTask(textTask);
   };
 
+  const handleClick = () => {
+    setInputDisability(inputDisability ? false : true);
+  };
+
   const upDateTask = (text, key) => {
     let newListTasks = listTasks;
     const itemModified = newListTasks.splice(key, 1, text);
@@ -40,7 +52,7 @@ const App = () => {
       <Header />
       <Main>
         <h2>What to do?</h2>
-        <form onSubmit={addTask}>
+        <Form onSubmit={addTask}>
           <input
             id="input"
             type="text"
@@ -49,8 +61,13 @@ const App = () => {
             value={newTask}
           />
           <button type="submit">OK!</button>
-        </form>
-        <ListTasks list={listTasks} upDateTask={upDateTask} />
+        </Form>
+        <ListTasks
+          list={listTasks}
+          inputDisability={inputDisability}
+          handleClick={handleClick}
+          upDateTask={upDateTask}
+        />
       </Main>
       <Footer />
     </div>
